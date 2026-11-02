@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pasang logo asli · Natal PMK UNY 2026</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #071b2b; color: #fff0d7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; padding: 60px 24px; background: radial-gradient(ellipse at 10% 10%, #174638 0, transparent 60%), #071b2b; }
+    main { max-width: 860px; margin: auto; }
+    .eyebrow { color: #d8b76a; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { font: normal clamp(36px, 5vw, 58px)/1.08 Georgia, serif; margin: 18px 0; }
+    p { max-width: 650px; color: #d5d6cc; line-height: 1.65; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    .card { border: 1px solid #d8b76a55; border-radius: 14px; padding: 24px; background: #fff0d707; }
+    label { font: 28px Georgia, serif; display: block; margin-bottom: 16px; }
+    input { width: 100%; color: #d5d6cc; font-size: 14px; }
+    input::file-selector-button { background: #fff0d7; color: #103e30; border: 0; padding: 10px 12px; border-radius: 5px; margin-right: 10px; cursor: pointer; }
+    .preview { width: 100%; height: 200px; object-fit: contain; display: none; margin: 22px 0 0; background: #fff; border-radius: 5px; }
+    .hint { font-size: 12px; margin: 14px 0 0; }
+    button { grid-column: 1/-1; border: none; border-radius: 8px; padding: 17px 24px; background: #d8b76a; color: #071b2b; font-weight: 650; font-size: 16px; cursor: pointer; }
+    button:disabled { opacity: .5; cursor: wait; }
+    #status { white-space: pre-wrap; overflow-wrap: anywhere; padding: 20px 0; font: 13px/1.7 ui-monospace, monospace; }
+    .note { font-size: 13px; color: #b3c0b6; border-top: 1px solid #d8b76a33; padding-top: 24px; }
+    @media(max-width: 640px) { form { grid-template-columns: 1fr; } body { padding-top: 35px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Natal PMK UNY 2026 · The Greatest Gift</div>
+    <h1>Dua logo asli.<br>Tetap sebagaimana diberikan.</h1>
+    <p>Pilih berkas logo UNY dan ilustrasi Natal Anda. Keduanya akan dimasukkan ke kartu penutup dengan warna dan proporsi asli. Isi berkas disalin persis, tanpa digambar ulang, dipotong, atau dihapus latarnya.</p>
+    <form id="logos">
+      <div class="card">
+        <label for="uny">Logo UNY</label>
+        <input id="uny" name="uny" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" required>
+        <p class="hint">PNG, JPEG, WebP, atau SVG statis · maks. 15 MB</p>
+        <img id="uny-preview" class="preview" alt="Pratinjau logo UNY asli">
+      </div>
+      <div class="card">
+        <label for="natal">Logo Natal</label>
+        <input id="natal" name="natal" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" required>
+        <p class="hint">Ilustrasi Natal yang Anda berikan, tanpa perubahan</p>
+        <img id="natal-preview" class="preview" alt="Pratinjau logo Natal asli">
+      </div>
+      <button id="submit" type="submit">Masukkan kedua logo ke proyek</button>
+    </form>
+    <div id="status" role="status" aria-live="polite"></div>
+    <p class="note">Halaman ini hanya alat impor lokal dan tidak muncul dalam video. Setelah berhasil, Remotion Studio memuat logo secara otomatis. Tanda SHA-256 mencatat identitas byte berkas asli yang tersimpan.</p>
+  </main>
+  <script>
+    const status = document.querySelector('#status');
+    const button = document.querySelector('#submit');
+    const previews = new Map();
+    for (const id of ['uny', 'natal']) {
+      document.getElementById(id).addEventListener('change', (event) => {
+        if (previews.has(id)) URL.revokeObjectURL(previews.get(id));
+        const file = event.target.files[0];
+        const image = document.getElementById(id + '-preview');
+        if (!file) { image.style.display = 'none'; return; }
+        if (file.size > 15 * 1024 * 1024) { event.target.value = ''; image.style.display = 'none'; status.textContent = 'Ukuran masing-masing berkas maksimal 15 MB.'; return; }
+        // Active SVG content is validated on the server before it is accepted.
+        if (file.type === 'image/svg+xml') { image.style.display = 'none'; return; }
+        const url = URL.createObjectURL(file);
+        previews.set(id, url);
+        image.src = url;
+        image.style.display = 'block';
+      });
+    }
+    const asBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Berkas tidak bisa dibaca.'));
+      reader.onload = () => resolve({name: file.name, base64: String(reader.result).split(',')[1]});
+      reader.readAsDataURL(file);
+    });
+    document.querySelector('#logos').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      button.disabled = true;
+      status.textContent = 'Menyimpan kedua berkas asli…';
+      try {
+        const [uny, natal] = await Promise.all(['uny', 'natal'].map((id) => asBase64(document.getElementById(id).files[0])));
+        const response = await fetch('/api/logos', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({uny, natal})});
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Impor gagal.');
+        status.textContent = 'Kedua logo sudah dimasukkan tanpa mengubah isi berkas.\n\n' + result.logos.map((logo) => logo.name + '\npublic/' + logo.path + '\nSHA-256: ' + logo.sha256).join('\n\n') + '\n\nKembali ke Studio untuk melihat kartu penutup.';
+      } catch (error) {
+        status.textContent = 'Belum tersimpan: ' + error.message + '\nJalankan halaman ini melalui node scripts/logo-upload-server.mjs.';
+      } finally { button.disabled = false; }
+    });
+  </script>
+</body>
+</html>

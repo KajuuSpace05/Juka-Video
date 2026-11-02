@@ -1,0 +1,17 @@
+{
+  "unchangedOriginalBytes": true,
+  "logos": [
+    {
+      "name": "Logo UNY",
+      "path": "logos/uny.png",
+      "sha256": "0687951276c788adfee851f5e3adce81a075a19c88d0906116197983375efcfd",
+      "bytes": 163944
+    },
+    {
+      "name": "Logo Natal",
+      "path": "logos/natal.png",
+      "sha256": "559499b4dc299fa9b15ceb9cd216777621b3dbaf9e737f3fd1d48bd86db8cfeb",
+      "bytes": 2034714
+    }
+  ]
+}
