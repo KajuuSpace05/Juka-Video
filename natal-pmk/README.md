@@ -6,7 +6,18 @@ Proyek Remotion yang dapat diedit: **60 detik, 1800 frame, 30 fps, 1920×1080**,
 
 ## Menjalankan
 
-Node.js 24 direkomendasikan; versi yang kompatibel ditentukan di `package.json`.
+Untuk Mac dengan **macOS Monterey 12**, gunakan **Node.js 22 LTS**, minimal **22.13.0** dalam seri 22. Node.js 24 memerlukan macOS 13.5 atau lebih baru. Versi Node yang diterima proyek ditentukan di `package.json`; `.nvmrc` memilih seri 22 bagi pengguna nvm. Lingkungan cloud proyek telah diuji dengan Node.js 24.19.0 pada Linux.
+
+Jika sudah menggunakan nvm, jalankan satu per satu:
+
+```bash
+nvm install 22
+nvm use 22
+nvm alias default 22
+node -v
+```
+
+Lanjutkan setelah `node -v` menampilkan versi yang diawali `v22.`.
 
 ```bash
 # Di Mac: masuk ke folder natal-pmk hasil ekstraksi ZIP.

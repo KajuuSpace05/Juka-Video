@@ -13,7 +13,7 @@ Atau klik tombol hijau **Code → Download ZIP** pada halaman repositori ini.
 
 1. Unduh ZIP di atas dan klik dua kali untuk mengekstraknya melalui Finder.
 2. Di dalam folder `Juka-Video-main`, buka folder **`natal-pmk`**. Folder ini berisi file `package.json`.
-3. Instal **Node.js LTS versi 24 atau lebih baru** dari [nodejs.org](https://nodejs.org/en/download). Gunakan installer macOS `.pkg`.
+3. Untuk **macOS Monterey 12**, gunakan **Node.js 22 LTS**, minimal versi **22.13.0** dalam seri 22, dari [nodejs.org](https://nodejs.org/en/download). Pilih versi 22 dan installer macOS `.pkg`. Node.js 24 memerlukan macOS 13.5 atau lebih baru, sehingga jangan memilihnya untuk Monterey.
 4. Tekan **Command + Space**, ketik **Terminal**, lalu tekan Enter.
 5. Ketik `cd` diikuti satu spasi, seret folder **`natal-pmk`** dari Finder ke Terminal, lalu tekan Enter. Dengan cara ini lokasi folder di Mac Anda akan terisi otomatis.
 6. Jalankan perintah berikut satu per satu, tunggu proses pertama selesai:
@@ -26,6 +26,17 @@ npm run dev
 Biarkan Terminal tetap terbuka. Browser biasanya terbuka otomatis. Jika tidak, buka alamat Studio yang dicetak di Terminal (biasanya `http://localhost:3000`). Pilih **NatalPMKUNY2026** di daftar komposisi sebelah kiri dan klik Play. Kedua logo muncul pada detik **56–60**.
 
 Untuk membuka lagi lain waktu, arahkan Terminal ke folder yang sama, lalu jalankan `npm run dev`. Untuk menghentikan Studio, tekan **Control + C** di Terminal.
+
+Jika Node.js sudah dipasang melalui **nvm**, pilih versi yang cocok tanpa memasang ulang nvm:
+
+```bash
+nvm install 22
+nvm use 22
+nvm alias default 22
+node -v
+```
+
+Hasil `node -v` seharusnya diawali `v22.`. Folder `natal-pmk` juga menyertakan `.nvmrc`, sehingga perintah `nvm use` dari folder tersebut memilih seri 22.
 
 ## Mengekspor MP4
 
