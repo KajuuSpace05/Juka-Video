@@ -1,10 +1,28 @@
 # Natal PMK UNY 2026 — The Greatest Gift
 
-Proyek Remotion yang dapat diedit: **60 detik, 1800 frame, 30 fps, 1920×1080**, delapan adegan dengan batas waktu tetap. React + TypeScript, Remotion 4.0.540, font lokal, ilustrasi orisinal, partikel deterministik, serta transisi cahaya emas.
+Revisi **Bang Motion** untuk proyek Remotion yang dapat diedit: **60 detik, 1800 frame, 30 fps, 1920×1080**, delapan adegan dengan batas waktu, naskah, dan urutan asli. React + TypeScript, Remotion 4.0.540, font lokal, ilustrasi orisinal, gerak kamera sesuai cerita, partikel deterministik, reveal kata/mask/script, dan lima jenis transisi.
 
-**Status:** animasi, enam ilustrasi, dan kedua logo asli tersedia. Logo UNY dan logo Natal diterima dari `LOGO KAMPUS DAN LOGO NATAL.zip` lalu dipasang ke kartu penutup sebagai PNG asli. Isi berkas dipertahankan byte demi byte dan dicatat dengan SHA-256. Musik belum disediakan. Video terbaru `out/Natal-PMK-UNY-2026.mp4` sudah selesai diekspor dengan kedua logo; video draf lama disimpan sebagai hasil historis sebelum logo diimpor.
+**Status:** animasi, enam ilustrasi, dan kedua logo asli tersedia. Logo UNY dan logo Natal diterima dari `LOGO KAMPUS DAN LOGO NATAL.zip` lalu dipasang ke kartu penutup sebagai PNG asli. Isi berkas dipertahankan byte demi byte dan dicatat dengan SHA-256. Musik belum disediakan. Ilustrasi `opening.png`, `togetherness.png`, dan `sunrise.png` kini menampilkan mahasiswa tanpa hijab sesuai revisi pengguna; adegan ibadah dan tudung tradisional Maria pada adegan kelahiran Yesus tidak diubah. Video lama `out/Natal-PMK-UNY-2026.mp4` merupakan hasil historis sebelum revisi Bang Motion. Tujuan ekspor revisi adalah `out/Natal-PMK-UNY-2026-BangMotion.mp4`; status pemeriksaan ekspor terbaru dicatat di `DELIVERY.md`.
 
-## Menjalankan
+## Menonton tanpa instalasi
+
+Dari folder hasil ekstraksi repositori, klik dua kali **`BUKA-VIDEO.html`**, atau buka **`watch/index.html`** dalam folder proyek ini. HTML memuat GSAP, CSS, dan JavaScript inline; gambar serta font memakai jalur lokal. Tidak perlu Node, npm, server, atau internet untuk menonton setelah proyek diunduh. Pertahankan susunan folder `watch` dan `public`. Video autoplay dan loop, **Space** untuk jeda/putar dan **R** untuk mengulang. Panel pemeriksaan hanya muncul dengan `?debug=1`; `?clean=1` menahan autoplay.
+
+Edisi browser mengikuti teks dan delapan batas waktu yang sama dengan Remotion. Implementasi dekorasi dan gerak keduanya berbeda, sehingga tidak diklaim identik piksel demi piksel. Remotion tetap acuan ekspor MP4.
+
+Pemeriksaan browser melalui HTTP lokal lulus tanpa koneksi eksternal. Pembukaan langsung `file://` belum dapat diverifikasi di browser cloud karena diblokir kebijakan administrator sebelum halaman dimuat; pengujian pada Mac/Safari belum dilakukan.
+
+Pengembang dapat membangun ulang HTML setelah mengubah konfigurasi:
+
+```bash
+npm run watch:build
+```
+
+**MP4 revisi siap putar:** [`video/Natal-PMK-UNY-2026-BangMotion.mp4`](../video/Natal-PMK-UNY-2026-BangMotion.mp4) di akar repositori. Video sudah diekspor dan dapat diputar tanpa Node.
+
+## Menjalankan Remotion untuk mengedit atau ekspor
+
+Sediakan ruang kosong **5–10 GB** jika akan menjalankan `npm ci` dan alat Remotion. Ruang sebesar itu tidak diperlukan untuk sekadar menonton HTML lokal.
 
 Untuk Mac dengan **macOS Monterey 12**, gunakan **Node.js 22 LTS**, minimal **22.13.0** dalam seri 22. Node.js 24 memerlukan macOS 13.5 atau lebih baru. Versi Node yang diterima proyek ditentukan di `package.json`; `.nvmrc` memilih seri 22 bagi pengguna nvm. Lingkungan cloud proyek telah diuji dengan Node.js 24.19.0 pada Linux.
 
@@ -59,17 +77,17 @@ npm run review
 npm run render:draft
 # Pemeriksaan dan ekspor dengan kedua logo asli:
 npm run check:assets
-npm run render
+npm run render:bang
 ```
 
-Tujuan ekspor produksi: `out/Natal-PMK-UNY-2026.mp4` (H.264).
+Tujuan ekspor revisi: `out/Natal-PMK-UNY-2026-BangMotion.mp4` (H.264). Perintah `npm run render` tetap tersedia dengan nama output standar `out/Natal-PMK-UNY-2026.mp4`.
 Video draf historis sebelum impor logo: `out/Natal-PMK-UNY-2026-DRAFT.mp4`. Gunakan ekspor produksi untuk hasil dengan kedua logo.
 
 Di mesin ini Chromium tersedia di `/usr/bin/chromium`. Tambahkan flag saat render jika Remotion meminta mengunduh browser:
 
 ```bash
 npm run render:draft -- --browser-executable=/usr/bin/chromium
-npm run render -- --browser-executable=/usr/bin/chromium
+npm run render:bang -- --browser-executable=/usr/bin/chromium
 ```
 
 `npm run review` merender delapan PNG representatif dalam `out/review/` dan mengecek metadata komposisi. Script review memakai `/usr/bin/chromium`; untuk mesin lain atur `REMOTION_BROWSER_EXECUTABLE` ke path Chromium/Chrome lokal.
@@ -81,7 +99,12 @@ npm run render -- --browser-executable=/usr/bin/chromium
 - `src/NatalPMKUNY2026.tsx`: posisi adegan serta overlay transisi; pertahankan delapan batas waktu asli.
 - `src/Root.tsx`: registrasi master dan delapan komposisi adegan.
 - `src/scenes/`: tata letak dan waktu masuk teks masing-masing adegan.
-- `src/components/`: kamera, teks, partikel, bintang, dekorasi, cahaya, dan audio.
+- `src/components/`: kamera, teks, partikel, motif cahaya, dekorasi foreground, transisi, dan audio.
+- `scripts/build-browser.mjs`: membangun edisi HTML dari konfigurasi proyek.
+- `watch/index.html`: edisi browser siap dibuka.
+- `public/vendor/`: GSAP lokal dan kredit/lisensi upstream.
+- `../.agents/skills/bang-motion/`: paket skill pengguna, MIT, karya Bang Tutorial.
+- `../docs/BANG-MOTION-DIRECTION.md`: keputusan desain dan penerapan prompt.
 - `src/art/Illustrations.tsx`: pustaka ilustrasi vektor alternatif, tidak aktif dalam komposisi utama.
 
 `timeline.ts` adalah tabel referensi editorial; posisi JSX di timeline utama tetap menjadi sumber timing yang dieksekusi, agar tiap Sequence dapat diedit independen di Studio. Setiap judul tetap berupa teks HTML yang bisa diedit, bukan bagian dari gambar.
@@ -100,4 +123,4 @@ Durasi ideal minimal 60 detik. Fade pembuka 1 detik dan penutup 2 detik disediak
 
 Storyboard delapan panel yang disebut di prompt tidak tersedia sebagai lampiran berkas pada sesi ini. Keenam plate dibuat orisinal berdasarkan deskripsi adegan, bukan reproduksi storyboard atau templat Envato. Bentuk bangunan terinspirasi kampus UNY; bukan dokumentasi arsitektur resmi. Karakter berada di dalam ilustrasi datar: gerak kamera, atmosfer, dekorasi vektor, partikel, dan teks berdiri sendiri; tidak ada klaim animasi tubuh/karakter terpisah. Logo tidak dibuat dengan AI.
 
-Lihat `DELIVERY.md` untuk struktur lengkap, manifest aset, dan hasil pemeriksaan.
+Skill Bang Motion ditambahkan dari ZIP pengguna. Prinsip gerak dan anti-slide diterapkan sambil mempertahankan prompt khusus pengguna, termasuk teks dan durasi 60 detik. Lihat `../docs/BANG-MOTION-DIRECTION.md` serta `DELIVERY.md` untuk keputusan desain, struktur, manifest aset, dan hasil pemeriksaan.

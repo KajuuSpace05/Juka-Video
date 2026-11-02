@@ -27,6 +27,7 @@
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle",
+    "watch:build": "node scripts/build-browser.mjs",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "check:assets": "node scripts/check-assets.mjs",
@@ -35,6 +36,7 @@
     "upload:logos": "node scripts/logo-upload-server.mjs",
     "review": "node scripts/render-review.mjs",
     "render": "node scripts/check-assets.mjs && remotion render src/index.ts NatalPMKUNY2026 out/Natal-PMK-UNY-2026.mp4 --codec=h264 --concurrency=2",
+    "render:bang": "node scripts/check-assets.mjs && remotion render src/index.ts NatalPMKUNY2026 out/Natal-PMK-UNY-2026-BangMotion.mp4 --codec=h264 --concurrency=2",
     "render:draft": "node scripts/check-assets.mjs --draft && remotion render src/index.ts NatalPMKUNY2026 out/Natal-PMK-UNY-2026-DRAFT.mp4 --codec=h264 --concurrency=2"
   },
   "allowScripts": {

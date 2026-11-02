@@ -1,20 +1,23 @@
-import type {ReactNode} from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
+import type {CSSProperties, ReactNode} from 'react';
+import {AbsoluteFill} from 'remotion';
 import {GoldParticles, MagicalLightTrail} from './Atmosphere';
-import {CinematicBackground} from './CinematicBackground';
-import {theme, clamp} from '../config/theme';
+import {CinematicBackground, type CameraMove} from './CinematicBackground';
+import {StoryMotif, storySceneFromSource, type StoryScene} from './StoryMotif';
+import {theme} from '../config/theme';
 
-export const SceneFrame = ({src, duration, children, text, top = 300, shade, trail = true}: {
+export const SceneFrame = ({src, duration, children, text, top = 300, shade, trail = true, layout = 'right', textLeft, textWidth, textAlign, motif, camera}: {
   src: string; duration: number; children?: ReactNode; text: ReactNode; top?: number; shade?: number; trail?: boolean;
+  layout?: 'right' | 'left' | 'center' | 'lower'; textLeft?: number; textWidth?: number; textAlign?: CSSProperties['textAlign']; motif?: StoryScene; camera?: CameraMove;
 }) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
+  const story = motif ?? storySceneFromSource(src);
+  const left = textLeft ?? (layout === 'left' ? 110 : layout === 'center' || layout === 'lower' ? 240 : 1090);
+  const width = textWidth ?? (layout === 'center' || layout === 'lower' ? 1440 : 730);
   return <AbsoluteFill style={{fontFamily: theme.serif, overflow: 'hidden', background: theme.navy}}>
-    <CinematicBackground src={src} duration={duration} shade={shade}/>
+    <CinematicBackground src={src} duration={duration} shade={shade} textSide={layout} camera={camera}/>
+    <StoryMotif scene={story} duration={duration}/>
     {children}
-    <GoldParticles count={40} seed={duration}/>
-    <div style={{position: 'absolute', left: 1090, top, width: 730, color: theme.ivory}}>{text}</div>
-    {trail ? <MagicalLightTrail x={1080} y={830} width={650} delay={Math.min(duration / fps - 1.6, 5.7)}/> : null}
-    <div style={{position: 'absolute', bottom: 86, right: 118, width: 90, height: 1, background: theme.gold, opacity: .5 * interpolate(frame, [fps, fps * 2], [0, 1], clamp)}}/>
+    <GoldParticles count={28} seed={duration}/>
+    <div style={{position: 'absolute', left, top, width, color: theme.ivory, textAlign: textAlign ?? (layout === 'center' || layout === 'lower' ? 'center' : 'left')}}>{text}</div>
+    {trail && story === 'community' ? <MagicalLightTrail x={left} y={800} width={Math.min(590, width)} delay={5.45}/> : null}
   </AbsoluteFill>;
 };

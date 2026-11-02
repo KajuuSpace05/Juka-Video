@@ -1,33 +1,44 @@
 # Natal PMK UNY 2026 — The Greatest Gift
 
-Proyek motion graphics Remotion: **60 detik · 1920×1080 · 30 fps · 8 adegan**.
-Kode, enam ilustrasi, tiga font beserta lisensinya, serta **logo UNY dan logo Natal asli** tersedia di folder [`natal-pmk`](./natal-pmk). Kedua logo dipertahankan tanpa perubahan gambar. Musik belum disertakan.
+Revisi **Bang Motion**: **60 detik · 1920×1080 · 30 fps · 8 adegan**, dengan prompt, teks, urutan, dan timing asli. Tiga ilustrasi mahasiswa diperbarui tanpa hijab untuk arahan visual acara ini. **Logo UNY dan logo Natal asli tetap dipertahankan tanpa perubahan gambar.** Musik belum disertakan.
 
-## Unduh proyek
+## Unduh dan tonton di MacBook tanpa instalasi
 
-**[Klik untuk mengunduh ZIP proyek](https://github.com/KajuuSpace05/Juka-Video/archive/refs/heads/main.zip)**
+**[Unduh ZIP proyek](https://github.com/KajuuSpace05/Juka-Video/archive/refs/heads/main.zip)**
 
-Atau klik tombol hijau **Code → Download ZIP** pada halaman repositori ini.
+Atau klik **Code → Download ZIP** pada halaman repositori ini.
 
-## Membuka di MacBook
+**[Unduh MP4 siap putar](https://github.com/KajuuSpace05/Juka-Video/raw/refs/heads/main/video/Natal-PMK-UNY-2026-BangMotion.mp4)** — dapat dibuka di QuickTime tanpa Node atau Remotion.
 
-1. Unduh ZIP di atas dan klik dua kali untuk mengekstraknya melalui Finder.
-2. Di dalam folder `Juka-Video-main`, buka folder **`natal-pmk`**. Folder ini berisi file `package.json`.
-3. Untuk **macOS Monterey 12**, gunakan **Node.js 22 LTS**, minimal versi **22.13.0** dalam seri 22, dari [nodejs.org](https://nodejs.org/en/download). Pilih versi 22 dan installer macOS `.pkg`. Node.js 24 memerlukan macOS 13.5 atau lebih baru, sehingga jangan memilihnya untuk Monterey.
-4. Tekan **Command + Space**, ketik **Terminal**, lalu tekan Enter.
-5. Ketik `cd` diikuti satu spasi, seret folder **`natal-pmk`** dari Finder ke Terminal, lalu tekan Enter. Dengan cara ini lokasi folder di Mac Anda akan terisi otomatis.
-6. Jalankan perintah berikut satu per satu, tunggu proses pertama selesai:
+![Pratinjau delapan adegan revisi](./docs/preview-bang-motion.jpg)
+
+1. Klik dua kali ZIP untuk mengekstraknya melalui Finder.
+2. Buka folder **`Juka-Video-main`**.
+3. Klik dua kali **`BUKA-VIDEO.html`**. Jika diminta memilih aplikasi, pilih Chrome atau Safari.
+4. Video otomatis diputar dan mengulang setelah 60 detik. **Space** untuk jeda/putar, **R** untuk mengulang.
+
+Cara menonton ini menggunakan HTML, gambar, logo, font, dan GSAP lokal. **Tidak memerlukan Node, npm, server, atau koneksi internet setelah ZIP diunduh.** Jangan memindahkan file HTML saja: biarkan folder `natal-pmk` tetap berada di lokasi hasil ekstraksi agar aset relatifnya terbaca.
+
+Edisi browser telah diuji melalui server HTTP lokal dengan koneksi eksternal diblokir. Pembukaan langsung melalui `file://` dirancang untuk browser biasa, tetapi belum diuji pada Mac/Safari: browser cloud yang dikelola memblokir navigasi `file://` sebelum halaman dimuat.
+
+## Mengedit di Remotion atau mengekspor MP4
+
+Bagian ini hanya diperlukan untuk **mengedit atau membuat MP4**, bukan untuk menonton HTML di atas. Untuk pemasangan dependensi, sediakan ruang kosong **5–10 GB**.
+
+1. Di dalam `Juka-Video-main`, cari folder **`natal-pmk`** yang berisi `package.json`.
+2. Untuk **macOS Monterey 12**, gunakan **Node.js 22 LTS**, minimal versi **22.13.0** dalam seri 22. Node.js 24 memerlukan macOS 13.5 atau lebih baru.
+3. Buka Terminal lewat **Command + Space → Terminal**.
+4. Ketik `cd` diikuti satu spasi, seret folder **`natal-pmk`** dari Finder ke Terminal, lalu tekan Enter.
+5. Jalankan satu per satu:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Biarkan Terminal tetap terbuka. Browser biasanya terbuka otomatis. Jika tidak, buka alamat Studio yang dicetak di Terminal (biasanya `http://localhost:3000`). Pilih **NatalPMKUNY2026** di daftar komposisi sebelah kiri dan klik Play. Kedua logo muncul pada detik **56–60**.
+Biarkan Terminal terbuka. Buka alamat Studio yang dicetak di Terminal, pilih **NatalPMKUNY2026**, lalu klik Play. Kedua logo muncul pada detik **56–60**. Untuk menghentikan Studio, tekan **Control + C**.
 
-Untuk membuka lagi lain waktu, arahkan Terminal ke folder yang sama, lalu jalankan `npm run dev`. Untuk menghentikan Studio, tekan **Control + C** di Terminal.
-
-Jika Node.js sudah dipasang melalui **nvm**, pilih versi yang cocok tanpa memasang ulang nvm:
+Jika Node sudah dipasang melalui **nvm**:
 
 ```bash
 nvm install 22
@@ -36,28 +47,23 @@ nvm alias default 22
 node -v
 ```
 
-Hasil `node -v` seharusnya diawali `v22.`. Folder `natal-pmk` juga menyertakan `.nvmrc`, sehingga perintah `nvm use` dari folder tersebut memilih seri 22.
+Hasil `node -v` seharusnya diawali `v22.`. File `natal-pmk/.nvmrc` juga memilih seri 22.
 
-## Mengekspor MP4
-
-Dari folder `natal-pmk`, jalankan:
+Untuk ekspor revisi Bang Motion dari folder `natal-pmk`:
 
 ```bash
-npm run render
+npm run render:bang
 ```
 
-Video akan disimpan di `natal-pmk/out/Natal-PMK-UNY-2026.mp4`. Pada render pertama, Remotion dapat mengunduh browser yang dibutuhkan; koneksi internet diperlukan.
+Hasilnya: `natal-pmk/out/Natal-PMK-UNY-2026-BangMotion.mp4`. Pada render pertama, Remotion dapat mengunduh browser yang dibutuhkan.
 
-## Panduan dan pemeriksaan
+## Isi dan panduan
 
-- [Panduan proyek dan pengaturan audio](./natal-pmk/README.md)
-- [Struktur lengkap, manifest aset, timing, dan hasil pemeriksaan](./natal-pmk/DELIVERY.md)
+- [Panduan proyek, ekspor, dan audio](./natal-pmk/README.md)
+- [Struktur, manifest aset, timing, dan hasil pemeriksaan](./natal-pmk/DELIVERY.md)
+- [Konsep dan penerapan Bang Motion](./docs/BANG-MOTION-DIRECTION.md)
+- [Skill Bang Motion 1.19.0](./.agents/skills/bang-motion/SKILL.md), karya Bang Tutorial, lisensi MIT; paket dari ZIP pengguna disertakan utuh.
 
-Untuk pemeriksaan kode dan aset:
+Revisi memakai variasi framing kamera, reveal kata/mask/script, motif cahaya yang berlanjut, dekorasi foreground terpisah, serta transisi bintang, pita, fajar, dedaunan, dan dissolve. Edisi browser dan Remotion memuat cerita serta timing yang sama, tetapi dekorasi dan geraknya tidak diklaim identik piksel demi piksel. Remotion menjadi acuan ekspor MP4.
 
-```bash
-npm run lint
-npm run check:assets
-```
-
-Folder dependensi `node_modules`, cache build, dan hasil video tidak disimpan di Git. Dependensi dipulihkan oleh `npm ci`; video dapat dibuat kembali dengan `npm run render`.
+Folder `node_modules`, cache build, dan output kerja `out/` tidak disimpan di Git. Satu MP4 final siap putar disertakan di `video/`. HTML siap tonton dan aset lokalnya juga disertakan; dependensi untuk pengeditan dipulihkan dengan `npm ci`.

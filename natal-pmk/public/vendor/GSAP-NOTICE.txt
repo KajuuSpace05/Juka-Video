@@ -1,0 +1,5 @@
+GSAP 3.13.0
+Copyright GreenSock / Webflow. Original license header is retained in gsap-3.13.0.min.js.
+License: Standard no-charge license, https://gsap.com/standard-license/
+Upstream npm package: https://registry.npmjs.org/gsap/-/gsap-3.13.0.tgz
+GSAP is not covered by the separate Bang Motion MIT license.

@@ -1,0 +1,44 @@
+{
+  "video": "video/Natal-PMK-UNY-2026-BangMotion.mp4",
+  "metadata": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "duration": "60.000000",
+        "nb_frames": "1800",
+        "side_data_list": [
+          {}
+        ]
+      }
+    ],
+    "format": {
+      "duration": "60.000000",
+      "size": "67801474"
+    }
+  },
+  "sha256": "3fafbdaecaf843396da0593f91e05391ed90c7ab34be1c3399127d9109ec3b96",
+  "originalLogosUnchanged": true,
+  "checks": {
+    "lintAndTypeScript": "passed",
+    "assetCheck": "passed",
+    "remotionBundle": "passed",
+    "keyframesReviewed": 8,
+    "transitionFramesReviewed": 15,
+    "browserSceneBoundaryChecks": 16,
+    "browserErrors": 0,
+    "browserExternalRequests": 0,
+    "browserDeterministicSeek": "passed",
+    "rootHtmlLauncherAndLoop": "passed",
+    "fullMp4Decode": "passed"
+  },
+  "limitations": [
+    "No music supplied",
+    "Original eight-panel storyboard not supplied",
+    "Managed browser blocks file:// navigation; tested via local HTTP with external network blocked, not on user Mac/Safari"
+  ]
+}

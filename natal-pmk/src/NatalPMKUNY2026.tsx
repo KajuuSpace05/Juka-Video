@@ -21,12 +21,12 @@ export const NatalPMKUNY2026 = () => {
     <Sequence from={39 * fps} durationInFrames={9 * fps} name="Gratitude" premountFor={fps}><Scene06Gratitude/></Sequence>
     <Sequence from={48 * fps} durationInFrames={8 * fps} name="Closing" premountFor={fps}><Scene07Closing/></Sequence>
     <Sequence from={56 * fps} durationInFrames={4 * fps} name="EndCard" premountFor={fps}><Scene08EndCard/></Sequence>
-    <Sequence from={5.7 * fps} durationInFrames={.6 * fps} name="Glow-01" premountFor={fps}><SceneTransition/></Sequence>
-    <Sequence from={12.7 * fps} durationInFrames={.6 * fps} name="Glow-02" premountFor={fps}><SceneTransition/></Sequence>
-    <Sequence from={20.7 * fps} durationInFrames={.6 * fps} name="Glow-03" premountFor={fps}><SceneTransition/></Sequence>
-    <Sequence from={29.7 * fps} durationInFrames={.6 * fps} name="Glow-04" premountFor={fps}><SceneTransition/></Sequence>
-    <Sequence from={38.7 * fps} durationInFrames={.6 * fps} name="Glow-05" premountFor={fps}><SceneTransition/></Sequence>
-    <Sequence from={47.7 * fps} durationInFrames={.6 * fps} name="Glow-06" premountFor={fps}><SceneTransition/></Sequence>
-    <Sequence from={55.7 * fps} durationInFrames={.6 * fps} name="Glow-07" premountFor={fps}><SceneTransition/></Sequence>
+    <Sequence from={5.7 * fps} durationInFrames={.6 * fps} name="Star-to-courtyard" premountFor={fps}><SceneTransition kind="star-iris"/></Sequence>
+    <Sequence from={12.7 * fps} durationInFrames={.6 * fps} name="Ribbon-to-gift" premountFor={fps}><SceneTransition kind="ribbon"/></Sequence>
+    <Sequence from={20.7 * fps} durationInFrames={.6 * fps} name="Gift-light-to-Bethlehem" premountFor={fps}><SceneTransition kind="star-iris"/></Sequence>
+    <Sequence from={29.7 * fps} durationInFrames={.6 * fps} name="Dawn-to-campus" premountFor={fps}><SceneTransition kind="sunrise"/></Sequence>
+    <Sequence from={38.7 * fps} durationInFrames={.6 * fps} name="Garden-to-worship" premountFor={fps}><SceneTransition kind="foliage"/></Sequence>
+    <Sequence from={47.7 * fps} durationInFrames={.6 * fps} name="Worship-to-greeting" premountFor={fps}><SceneTransition kind="soft"/></Sequence>
+    <Sequence from={55.7 * fps} durationInFrames={.6 * fps} name="Ribbon-to-blessing" premountFor={fps}><SceneTransition kind="ribbon"/></Sequence>
   </AbsoluteFill>;
 };
